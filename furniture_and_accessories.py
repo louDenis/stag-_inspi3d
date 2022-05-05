@@ -50,17 +50,22 @@ def build_config(list_furniture):
         convert_config(config)
         asset = parse_vray_text.get_config_asset(config)
         list_config.append(asset)
-        print(len(list_config))
     return list_config
 
 def render(list_config_main, list_config_accessories):
     renderer = vray.Renderer()
     renderer.load('templates/preview_2018/preview_2018.vrscene')
     furniture_main = VRayFurniture(renderer=renderer, config_data=list_config_main[0])
+    furniture_main.move_y(-150)
+
+    d = {}
+    #for i in range(len(list_config_accessories)):
+    #    d["furniture{0}".format(i)] = VRayFurniture(renderer=renderer, config_data=list_config_accessories[0])
 
     furniture1 = VRayFurniture(renderer=renderer, config_data=list_config_accessories[0])
     furniture1.move_x(100)
     furniture2 = VRayFurniture(renderer=renderer, config_data=list_config_accessories[1])
+    furniture2.move_y(150)
 
     renderer.start()
     renderer.waitForRenderEnd()
@@ -129,10 +134,11 @@ def main(argv):
         sys.exit(2)
 
     #construire les asset correspondant à chaque meuble
-    """list_config_main_furniture = build_config(list_main_furniture)
+    list_config_main_furniture = build_config(list_main_furniture)
     list_config_accessories = build_config(list_accessories)
+    #print(list_config_accessories[0])
 
-    render(list_config_main_furniture, list_config_accessories)"""
+    render(list_config_main_furniture, list_config_accessories)
 
 
     #print('main furniture is', main_furniture)
