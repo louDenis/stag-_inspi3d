@@ -11,29 +11,20 @@ def get_list(raw_furniture):
     raw_list= list(raw_furniture.split(" "))
     res_list = []
     temp = []
-    print(raw_list)
-    print("res boucle:")
     bool_end = False
-    is_there_and = False
-    max_iter = 1
+    max_iter = 0
     for i in range(len(raw_list)):
-        if i==0 :
-            res_list.append(raw_list[i])
-            continue
         #print("i=", i, "max_iter=", max_iter)
         if (i - max_iter != 0):
             #print("oui")
             continue
         if bool_end :
             break
-        if is_there_and :
-            is_there_and = False
-            continue
-        
-        print("i=",i, "raw_list[i]=", raw_list[i])
+
+        #print("i=",i, "raw_list[i]=", raw_list[i])
         temp = []
         for j in range(i, len(raw_list)):
-            print("\t temp=", temp)
+            #print("\t temp=", temp)
             max_iter = j
             if j == (len(raw_list)-1):
                 bool_end = True
@@ -42,12 +33,15 @@ def get_list(raw_furniture):
             else:
                 break
         if temp != []:
-            res_list.append(" ".join(str(x) for x in temp))
-        else :
-            res_list.append(raw_list[i+1])
-            is_there_and = True
+            num_catalog = temp[0]
+            #print("temp 0=", temp[0])
+            ref_furniture = temp[1:]
+            #print("ref =", ref_furniture)
+            res_list.append(num_catalog)
+            res_list.append(" ".join(str(x) for x in ref_furniture))
         max_iter += 1
     print(res_list)
+    return res_list
 
 def build_config(list_furniture):
     list_config = []
@@ -127,13 +121,12 @@ def main(argv):
         sys.exit(2)
 
     #cast les string en liste est associer les ref à leur num de catalogue
-    #list_main_furniture= get_list(main_furniture)
+    list_main_furniture= get_list(main_furniture)
     list_accessories= get_list(accessories)
 
-    """print("list_accessories=", list_accessories)
     if (len(list_main_furniture) != 2):
-        print("ERROR: you must enter exactly one furniture")
-        sys.exit(2)"""
+        print("ERROR: you must enter exactly one main furniture")
+        sys.exit(2)
 
     #construire les asset correspondant à chaque meuble
     """list_config_main_furniture = build_config(list_main_furniture)
