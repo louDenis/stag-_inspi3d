@@ -1,0 +1,17 @@
+{
+    "furniture": {"catalog_id": "543", "reference" : "420042"},
+
+    "accessories": [ {"catalog_id": "500", "reference" : "Chaise 1861 Napoléon III"} ,
+                     {"catalog_id": "590", "reference" : "OUTL29" } ],
+
+    "random_accessories": false,
+    "nb_accessories_random": "2",
+    "catalog_numbers" : ["500", "590"],
+
+    "random_position": false,
+    "relative_position": false,
+
+    "pos_main_furniture": "100.0 0.0 0.0",
+    "pos_accessories": ["150.0 150.0 0.0", "-100.0 -10.0 0.0"]
+
+}
